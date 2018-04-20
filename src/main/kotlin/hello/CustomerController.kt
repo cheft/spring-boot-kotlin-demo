@@ -1,16 +1,20 @@
 package hello
 
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
+@RequestMapping("/customers")
 class CustomerController(private val repository: CustomerRepository) {
 
-	@GetMapping("/customers")
-	fun findAll() = repository.findAll()
+    @GetMapping
+    fun findAll() = repository.findAll()
 
-	@GetMapping("/customers/{lastName}")
-	fun findByLastName(@PathVariable lastName:String)
-			= repository.findByLastName(lastName)
+    @GetMapping("/{lastName}")
+    fun findByLastName(@PathVariable lastName: String) = repository.findByLastName(lastName)
+
+    @PostMapping
+    fun save() = repository.findAll()
+
+    @DeleteMapping("/{firstName}")
+    fun del(@PathVariable firstName: String) = Customer(firstName, "Chen")
 }
